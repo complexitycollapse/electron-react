@@ -28,7 +28,11 @@ const createWindow = () => {
 
   // win.maximize();
   // win.show();
-  win.loadFile("window/index.html");
+  if (env === "development") {
+    win.loadURL("http://localhost:5173/window/index.html");
+  } else {
+    win.loadFile(path.join(__dirname, "dist/window/index.html"));
+  }
 
   // Listen for console events and open DevTools on error
   win.webContents.on("console-message", (event, level, message, line, sourceId) => {
